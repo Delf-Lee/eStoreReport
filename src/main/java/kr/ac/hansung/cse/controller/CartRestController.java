@@ -100,7 +100,7 @@ public class CartRestController {
 				CartItem cartItem = cartItems.get(i);
 				int afterQuantity = cartItem.getQuantity() + quantity;
 				if (afterQuantity < 0 || afterQuantity > cartItem.getProduct().getUnitInStock()) {
-					break;
+					return new ResponseEntity<Void>(HttpStatus.EXPECTATION_FAILED);
 				}
 				cartItem.setQuantity(afterQuantity);
 				cartItem.setTotalPrice(product.getPrice() * cartItem.getQuantity());
